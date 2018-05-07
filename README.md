@@ -2,14 +2,37 @@
 deep ocr
 --------
 
+See [README_en.md](README_en.md) for English installation documentation.
+
+只在ubuntu下面测试通过，需要virtualenv安装，安装路径可自行调整：
+
+```
+git clone https://github.com/JinpengLI/deep_ocr.git ~/deep_ocr
+virtualenv ~/deep_ocr_env
+source ~/deep_ocr_env/bin/activate
+pip install -r ~/deep_ocr/requirements.txt
+cd ~/deep_ocr && python setup.py install
+```
+
+测试
+
+```
+source ~/deep_ocr_env/bin/activate && cd ~/deep_ocr && ./bin/deep_ocr_reco data/holiday_notification.jpg -v -d
+```
+
+
+旧版说明
+--------
+
+部分还能用，暂时保留，以后准备删除.
 
 估计很多开发员使用tesseract做中文识别，但是结果不是一般的差，譬如下面的图片
 
-![alt text](https://github.com/JinpengLI/deep_ocr/blob/master/test_data.png "需要识别文本")
+![alt text](https://github.com/JinpengLI/deep_ocr/blob/master/data/test_data.png "需要识别文本")
 
 
 ```
-$ tesseract -l chi_sim test_data.png out_test_data
+$ tesseract -l chi_sim data/test_data.png out_test_data
 ```
 
 ```
@@ -37,7 +60,8 @@ $ python reco_chars.py
 ```
 Deep Convolutional Network for Handwritten Chinese Character Recognition
 
-http://cs231n.stanford.edu/reports/zyh_project.pdf
+http://yuhao.im/files/Zhang_CNNChar.pdf
+
 ```
 
 通过 Docker 安装
@@ -49,10 +73,22 @@ http://cs231n.stanford.edu/reports/zyh_project.pdf
 https://www.docker.com/
 ```
 
-下载deep_ocr_workspace.zip (http://pan.baidu.com/s/1jIfThu2 和 http://pan.baidu.com/s/1miyLROO )，解压到本地硬盘，譬如到以下地方 (~/deep_ocr_workspace)
+下载deep_ocr_workspace.zip (https://pan.baidu.com/s/1nvz2wrB 和 https://pan.baidu.com/s/1qYPKH3Y )
+
+两个文件的md5sum值，用于校验文件是否成功下载。
 
 ```
-unzip deep_ocr_workspace.zip -d ~/
+$ md5sum deep_ocr_workspace.zip
+ffeda7ea6604e7b8835c05a33fa0459e  deep_ocr_workspace.zip
+$ md5sum deep_ocr_workspace.z01
+ea66796c2bbdb2bec9b7ee28eb44012d  deep_ocr_workspace.z01
+```
+
+解压到本地硬盘，譬如到以下地方 (~/deep_ocr_workspace)
+
+```
+cat deep_ocr_workspace.z* > unsplit_deep_ocr_workspace.zip
+unzip unsplit_deep_ocr_workspace.zip -d ~/
 ```
 
 这个zip包含deep_ocr所有需要数据文件（由于太大了，所以放百度云了）。所有数据到解压到 `~/deep_ocr_workspace`，你也可以把需要处理的数据放到这个文件夹。
